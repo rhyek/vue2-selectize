@@ -1,0 +1,37 @@
+{
+  "name": "vue2-selectize",
+  "version": "1.0.0",
+  "description": "A Selectize wrapper for VueJS.",
+  "main": "dist/main.js",
+  "scripts": {
+    "dev": "webpack -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rhyek/vue2-selectize.git"
+  },
+  "keywords": [
+    "vue",
+    "vuejs",
+    "selectize",
+    "select"
+  ],
+  "author": "https://github.com/rhyek",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rhyek/vue2-selectize/issues"
+  },
+  "homepage": "https://github.com/rhyek/vue2-selectize#readme",
+  "devDependencies": {
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-preset-env": "^1.1.8",
+    "vue-loader": "^11.1.0",
+    "vue-template-compiler": "^2.1.10",
+    "webpack": "^2.2.1"
+  },
+  "dependencies": {
+    "selectize": "^0.12.4"
+  }
+}
