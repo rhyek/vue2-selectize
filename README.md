@@ -35,7 +35,7 @@ export default {
 }
 ```
 ```scss
-// Optionally include the Bootstrap 3 theme in your main SASS file (or your component's <style lang="scss"/> section).
+// Include your preferred theme in your main SASS file (or your component's <style lang="scss"/> section).
 
 @import "~selectize/dist/css/selectize.bootstrap3.css";
 ```
