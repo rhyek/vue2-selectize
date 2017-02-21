@@ -44,7 +44,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-  @import "~selectize/dist/css/selectize.bootstrap3.css";
-</style>

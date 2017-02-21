@@ -1,6 +1,6 @@
 {
   "name": "vue2-selectize",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Selectize wrapper for VueJS.",
   "main": "dist/main.js",
   "scripts": {
@@ -29,9 +29,6 @@
     "babel-loader": "^6.3.2",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-env": "^1.1.8",
-    "css-loader": "^0.26.1",
-    "node-sass": "^4.5.0",
-    "sass-loader": "^6.0.1",
     "vue-loader": "^11.1.0",
     "vue-template-compiler": "^2.1.10",
     "webpack": "^2.2.1"
