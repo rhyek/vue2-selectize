@@ -7,10 +7,13 @@
 <script>
 import $ from 'jquery'
 
+if (!$().selectize) {
+  require('selectize')
+}
+
 export default {
   props: {
     value: {
-      type: [String, Number, Object],
       default: ''
     },
     settings: {
@@ -19,16 +22,15 @@ export default {
     }
   },
   mounted() {
-    //console.log('selectize', $)
-    // jQuery(this.$el).selec, {
-    //   onInitialize: () => {
-    //     this.setValue()
-    //   },
-    //   onChange: value => {
-    //     this.$emit('input', value)
-    //   },
-    //   ...this.settings
-    // })
+    $(this.$el).selectize({
+      onInitialize: () => {
+        this.setValue()
+      },
+      onChange: value => {
+        this.$emit('input', value)
+      },
+      ...this.settings
+    })
   },
   watch: {
     value() {
@@ -42,3 +44,7 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  @import "~selectize/dist/css/selectize.bootstrap3.css";
+</style>

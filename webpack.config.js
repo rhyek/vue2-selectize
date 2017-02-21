@@ -16,14 +16,6 @@ module.exports = {
       path.resolve('./node_modules')
     ]
   },
-  externals: {
-    jquery: {
-      amd: 'jquery',
-      commonjs: 'jquery',
-      commonjs2: 'jquery',
-      root: '$'
-    }
-  },
   module: {
     loaders: [
       {
@@ -31,10 +23,19 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           loaders: {
-            js: 'babel-loader'
+            js: 'babel-loader',
+            scss: 'vue-style-loader!css-loader!sass-loader'
           }
         }
       }
     ]
+  },
+  externals: {
+    jquery: {
+      amd: 'jquery',
+      commonjs: 'jquery',
+      commonjs2: 'jquery',
+      root: 'jQuery'
+    }
   }
 }
