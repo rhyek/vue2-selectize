@@ -2,7 +2,7 @@
   "name": "vue2-selectize",
   "version": "1.0.2",
   "description": "A Selectize wrapper for VueJS.",
-  "main": "dist/main.js",
+  "main": "dist/vue2-selectize.js",
   "scripts": {
     "build": "webpack -p",
     "dev": "webpack -w",
