@@ -6,7 +6,7 @@ module.exports = {
   entry: './src/main.vue',
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'main.js',
+    filename: 'vue2-selectize.js',
     libraryTarget: 'umd'
   },
   resolve: {
