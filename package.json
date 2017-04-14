@@ -1,6 +1,6 @@
 {
   "name": "vue2-selectize",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A Selectize wrapper for VueJS.",
   "main": "dist/vue2-selectize.js",
   "scripts": {
@@ -34,6 +34,7 @@
     "webpack": "^2.2.1"
   },
   "dependencies": {
+    "deep-equal": "^1.0.1",
     "selectize": "^0.12.4"
   }
 }
