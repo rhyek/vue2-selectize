@@ -1,3 +1,11 @@
+<template>
+  <div>
+    <select ref="select">
+      <slot/>
+    </select>
+  </div>
+</template>
+
 <script>
 import $ from 'jquery'
 import equal from 'deep-equal'
@@ -22,7 +30,7 @@ export default {
     }
   },
   mounted() {
-    $(this.$el).selectize({
+    $(this.$refs.select).selectize({
       onInitialize: () => {
         this.setValue()
       },
@@ -43,21 +51,23 @@ export default {
     }
   },
   watch: {
-    value() {
-      this.setValue()
+    value(value, old) {
+      if (!equal(value, old)) {
+        this.setValue()
+      }
     },
     options (value, old) {
-      if (this.$el.selectize && !equal(value, old)) {
-        this.$el.selectize.clearOptions()
-        this.$el.selectize.addOption(this.current)
-        this.$el.selectize.refreshOptions(false)
+      if (this.$refs.select.selectize && !equal(value, old)) {
+        this.$refs.select.selectize.clearOptions()
+        this.$refs.select.selectize.addOption(this.current)
+        this.$refs.select.selectize.refreshOptions(false)
         this.setValue()
       }
     }
   },
   methods: {
     track (nodes) {
-      if (nodes)
+      if (nodes) {
         this.current = nodes
           .filter(node => node.tag && node.tag.toLowerCase() === 'option')
           .map(node => {
@@ -66,19 +76,18 @@ export default {
               value: node.data.domProps ? node.data.domProps.value : node.data.attrs.value
             }
           })
-      else
+      }
+      else {
         this.current = []
+      }
     },
-    setValue() {
-      this.$el.selectize.setValue(this.value)
+    setValue () {
+      this.$refs.select.selectize.setValue(this.value)
     }
   },
-  render (c) {
+  beforeUpdate () {
     if (this.settings.options === undefined)
       this.track(this.$slots.default)
-    return c(
-      'select',
-      this.$slots.default)
   }
 }
 </script>
