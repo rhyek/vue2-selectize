@@ -1,5 +1,5 @@
 <template>
-  <select ref="select">
+  <select>
     <slot/>
   </select>
 </template>
