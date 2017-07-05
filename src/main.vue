@@ -12,6 +12,14 @@ if (!$().selectize) {
   require('selectize')
 }
 
+function clean (options) {
+  return options
+    .map(option => ({
+      text: option.text,
+      value: option.value
+    }))
+}
+
 export default {
   props: {
     value: {
@@ -24,10 +32,28 @@ export default {
   },
   data () {
     return {
-      current: null
+      options: [],
+      createdOptions: []
     }
   },
   mounted () {
+    if (this.settings.create) {
+      const create = this.settings.create
+      this.settings.create = input => {
+        let option = null
+        if (create === true) {
+          option = {
+            text: input,
+            value: input
+          }
+        }
+        else {
+          option = create(input)
+        }
+        this.createdOptions.push(option)
+        return option
+      }
+    }
     $(this.$el).selectize({
       onInitialize: () => {
         this.setValue()
@@ -37,20 +63,11 @@ export default {
       },
       ...this.settings
     })
+    this.makeOptions(true)
   },
   destroyed () {
     if (this.$el.selectize) {
       this.$el.selectize.destroy()
-    }
-  },
-  computed: {
-    options () {
-      if (this.current != null)
-        return this.current
-          .map(option => ({
-            text: option.text,
-            value: option.value
-          }))
     }
   },
   watch: {
@@ -58,20 +75,15 @@ export default {
       if (!equal(value, old)) {
         this.setValue()
       }
-    },
-    options (value, old) {
-      if (this.$el.selectize && !equal(value, old)) {
-        this.$el.selectize.clearOptions()
-        this.$el.selectize.addOption(this.current)
-        this.$el.selectize.refreshOptions(false)
-        this.setValue()
-      }
     }
   },
   methods: {
-    track (nodes) {
-      if (nodes) {
-        this.current = nodes
+    makeOptions (justLocal = false) {
+      const old = this.options
+      let _new = []
+      const nodes = this.$slots.default
+      if (this.settings.options === undefined && nodes) {
+        _new = nodes
           .filter(node => node.tag && node.tag.toLowerCase() === 'option')
           .map(node => {
             return {
@@ -79,18 +91,27 @@ export default {
               value: node.data.domProps ? node.data.domProps.value : node.data.attrs.value
             }
           })
+          .concat(this.createdOptions)
       }
-      else {
-        this.current = []
+      if (!equal(clean(old), clean(_new))) {
+        this.options = _new
+        if (!justLocal) {
+          const optionValues = this.options.map(o => o.value)
+          Object.values(this.$el.selectize.options)
+            .filter(option => optionValues.every(v => !equal(v, option.value)))
+            .forEach(option => this.$el.selectize.removeOption(option.value))
+          this.$el.selectize.addOption(this.options)
+          this.$el.selectize.refreshOptions(false)
+          this.setValue()
+        }
       }
     },
     setValue () {
-      this.$el.selectize.setValue(this.value)
+      this.$el.selectize.setValue(this.value, true)
     }
   },
   beforeUpdate () {
-    if (this.settings.options === undefined)
-      this.track(this.$slots.default)
+    this.makeOptions()
   }
 }
 </script>
