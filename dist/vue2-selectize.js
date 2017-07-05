@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 9);
+/******/ 	return __webpack_require__(__webpack_require__.s = 10);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -99,14 +99,14 @@ var _jquery = __webpack_require__(0);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _deepEqual = __webpack_require__(3);
+var _deepEqual = __webpack_require__(4);
 
 var _deepEqual2 = _interopRequireDefault(_deepEqual);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 if (!(0, _jquery2.default)().selectize) {
-  __webpack_require__(7);
+  __webpack_require__(8);
 }
 
 exports.default = {
@@ -129,7 +129,7 @@ exports.default = {
   mounted: function mounted() {
     var _this = this;
 
-    (0, _jquery2.default)(this.$refs.select).selectize(_extends({
+    (0, _jquery2.default)(this.$el).selectize(_extends({
       onInitialize: function onInitialize() {
         _this.setValue();
       },
@@ -137,6 +137,11 @@ exports.default = {
         _this.$emit('input', value);
       }
     }, this.settings));
+  },
+  destroyed: function destroyed() {
+    if (this.$el.selectize) {
+      this.$el.selectize.destroy();
+    }
   },
 
   computed: {
@@ -156,10 +161,10 @@ exports.default = {
       }
     },
     options: function options(value, old) {
-      if (this.$refs.select.selectize && !(0, _deepEqual2.default)(value, old)) {
-        this.$refs.select.selectize.clearOptions();
-        this.$refs.select.selectize.addOption(this.current);
-        this.$refs.select.selectize.refreshOptions(false);
+      if (this.$el.selectize && !(0, _deepEqual2.default)(value, old)) {
+        this.$el.selectize.clearOptions();
+        this.$el.selectize.addOption(this.current);
+        this.$el.selectize.refreshOptions(false);
         this.setValue();
       }
     }
@@ -180,7 +185,7 @@ exports.default = {
       }
     },
     setValue: function setValue() {
-      this.$refs.select.selectize.setValue(this.value);
+      this.$el.selectize.setValue(this.value);
     }
   },
   beforeUpdate: function beforeUpdate() {
@@ -249,9 +254,26 @@ module.exports = function normalizeComponent (
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('select', {
+    ref: "select"
+  }, [_vm._t("default")], 2)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-4787ef3e", module.exports)
+  }
+}
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var pSlice = Array.prototype.slice;
-var objectKeys = __webpack_require__(5);
-var isArguments = __webpack_require__(4);
+var objectKeys = __webpack_require__(6);
+var isArguments = __webpack_require__(5);
 
 var deepEqual = module.exports = function (actual, expected, opts) {
   if (!opts) opts = {};
@@ -346,7 +368,7 @@ function objEquiv(a, b, opts) {
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports) {
 
 var supportsArgumentsClass = (function(){
@@ -372,7 +394,7 @@ function unsupported(object){
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports) {
 
 exports = module.exports = typeof Object.keys === 'function'
@@ -387,7 +409,7 @@ function shim (obj) {
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -531,7 +553,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
 }));
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -555,7 +577,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 (function(root, factory) {
 	if (true) {
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(0),__webpack_require__(8),__webpack_require__(6)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(0),__webpack_require__(9),__webpack_require__(7)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -3732,7 +3754,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 }));
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -4240,14 +4262,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(2)(
   /* script */
   __webpack_require__(1),
   /* template */
-  __webpack_require__(10),
+  __webpack_require__(3),
   /* scopeId */
   null,
   /* cssModules */
@@ -4272,23 +4294,6 @@ if (false) {(function () {
 
 module.exports = Component.exports
 
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('select', {
-    ref: "select"
-  }, [_vm._t("default")], 2)])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-4787ef3e", module.exports)
-  }
-}
 
 /***/ })
 /******/ ]);

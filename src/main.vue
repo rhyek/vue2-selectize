@@ -1,9 +1,7 @@
 <template>
-  <div>
-    <select ref="select">
-      <slot/>
-    </select>
-  </div>
+  <select ref="select">
+    <slot/>
+  </select>
 </template>
 
 <script>
@@ -30,7 +28,7 @@ export default {
     }
   },
   mounted() {
-    $(this.$refs.select).selectize({
+    $(this.$el).selectize({
       onInitialize: () => {
         this.setValue()
       },
@@ -39,6 +37,11 @@ export default {
       },
       ...this.settings
     })
+  },
+  destroyed () {
+    if (this.$el.selectize) {
+      this.$el.selectize.destroy()
+    }
   },
   computed: {
     options () {
@@ -57,10 +60,10 @@ export default {
       }
     },
     options (value, old) {
-      if (this.$refs.select.selectize && !equal(value, old)) {
-        this.$refs.select.selectize.clearOptions()
-        this.$refs.select.selectize.addOption(this.current)
-        this.$refs.select.selectize.refreshOptions(false)
+      if (this.$el.selectize && !equal(value, old)) {
+        this.$el.selectize.clearOptions()
+        this.$el.selectize.addOption(this.current)
+        this.$el.selectize.refreshOptions(false)
         this.setValue()
       }
     }
@@ -82,7 +85,7 @@ export default {
       }
     },
     setValue () {
-      this.$refs.select.selectize.setValue(this.value)
+      this.$el.selectize.setValue(this.value)
     }
   },
   beforeUpdate () {
