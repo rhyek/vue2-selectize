@@ -27,7 +27,7 @@ export default {
       current: null
     }
   },
-  mounted() {
+  mounted () {
     $(this.$el).selectize({
       onInitialize: () => {
         this.setValue()
@@ -54,7 +54,7 @@ export default {
     }
   },
   watch: {
-    value(value, old) {
+    value (value, old) {
       if (!equal(value, old)) {
         this.setValue()
       }
