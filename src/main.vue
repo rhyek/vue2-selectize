@@ -28,6 +28,10 @@ export default {
     settings: {
       type: Object,
       default: () => ({})
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -64,6 +68,7 @@ export default {
       ...this.settings
     })
     this.makeOptions(true)
+    this.toggleDisabled(this.disabled)
   },
   destroyed () {
     if (this.$el.selectize) {
@@ -75,9 +80,20 @@ export default {
       if (!equal(value, old)) {
         this.setValue()
       }
+    },
+    disabled (value) {
+      this.toggleDisabled(value)
     }
   },
   methods: {
+    toggleDisabled (value) {
+      if (value) {
+        this.$el.selectize.disable()
+      }
+      else {
+        this.$el.selectize.enable()
+      }
+    },
     makeOptions (justLocal = false) {
       const old = this.options
       let _new = []
