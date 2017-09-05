@@ -1,5 +1,5 @@
 <template>
-  <select>
+  <select :name="name">
     <slot/>
   </select>
 </template>
@@ -22,6 +22,10 @@ function clean (options) {
 
 export default {
   props: {
+    name: {
+      type: String,
+      default: null
+    },
     value: {
       default: ''
     },
