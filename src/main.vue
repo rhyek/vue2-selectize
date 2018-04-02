@@ -43,7 +43,7 @@ export default {
   mounted () {
     if (this.settings.create) {
       const create = this.settings.create
-      this.settings.create = input => {
+      this.settings.create = (input, callback) => {
         let option = null
         if (create === true) {
           option = {
@@ -52,7 +52,7 @@ export default {
           }
         }
         else {
-          option = create(input)
+          option = create(input, callback)
         }
         this.createdOptions.push(option)
         return option
