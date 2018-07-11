@@ -113,7 +113,9 @@ export default {
         this.options = _new
         if (!justLocal) {
           const optionValues = this.options.map(o => o.value)
-          Object.values(this.$el.selectize.options)
+          Object.keys(this.$el.selectize.options)
+            //IE11 fix, Object.values is not supported
+            .map(key => this.$el.selectize.options[key])
             .filter(option => optionValues.every(v => !equal(v, option.value)))
             .forEach(option => this.$el.selectize.removeOption(option.value))
           this.$el.selectize.addOption(this.options)
