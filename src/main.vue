@@ -112,6 +112,7 @@ export default {
       if (!equal(clean(old), clean(_new))) {
         this.options = _new
         if (!justLocal) {
+          this.$el.selectize.clearOptions();
           const optionValues = this.options.map(o => o.value)
           Object.keys(this.$el.selectize.options)
             //IE11 fix, Object.values is not supported
