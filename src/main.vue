@@ -41,9 +41,10 @@ export default {
     }
   },
   mounted () {
+    var self = this
     if (this.settings.create) {
       const create = this.settings.create
-      this.settings.create = input => {
+      this.settings.create = function(input,callback) {
         let option = null
         if (create === true) {
           option = {
@@ -52,9 +53,9 @@ export default {
           }
         }
         else {
-          option = create(input)
+          option = create(input, callback)
         }
-        this.createdOptions.push(option)
+        self.createdOptions.push(option)
         return option
       }
     }
